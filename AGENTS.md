@@ -20,7 +20,7 @@ Do not add dependencies or replace the stack unless asked.
 
 ## Skills and Docs
 
-Project skills live in `.agents/skills/`. `skills-lock.json` at the repo root pins installed skills and versions. Restore them with `npx skills experimental_install`.
+Project skills live in `.agents/skills/`. `skills-lock.json` at the repo root records installed skills and content hashes for reproducible restores. Restore them with `bunx skills experimental_install` (the `skills` CLI is pinned in `package.json`).
 
 Use relevant installed skills for framework-specific work.
 
