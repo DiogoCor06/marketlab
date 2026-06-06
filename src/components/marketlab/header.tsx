@@ -1,38 +1,37 @@
-import Image from "next/image";
 import Link from "next/link";
 
-import { isSupabaseConnected } from "@/lib/supabase/config";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { cn } from "@/lib/utils";
 
-function StatusBadge({ children }: { children: React.ReactNode }) {
+export function Header({ className }: { className?: string }) {
   return (
-    <div className="flex items-center gap-2 rounded-full border border-[#00d395]/30 bg-[#00d395]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-md shadow-[0_0_15px_rgba(0,211,149,0.15)]">
-      <span className="h-1.5 w-1.5 rounded-full bg-[#00d395] animate-pulse" />
-      {children}
-    </div>
-  );
-}
-
-export function Header() {
-  return (
-    <header className="border-b border-white/10 bg-[#080a0d] text-white">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-5 sm:flex-row sm:justify-between">
-        <div>
-          <Link href="/" className="block">
-            <Image
-              src="/logo/logo-marketlab.webp"
-              alt="MarketLab"
-              width={677}
-              height={369}
-              className="h-24 w-44 object-contain"
-              priority
-            />
+    <header
+      className={cn(
+        "border-b border-border bg-background text-foreground",
+        className,
+      )}
+    >
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
+        <div className="flex items-center gap-6">
+          <Link
+            href="/markets"
+            className="text-lg font-semibold tracking-tight hover:opacity-80"
+          >
+            MarketLab
           </Link>
+          <nav>
+            <Link
+              href="/markets"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Markets
+            </Link>
+          </nav>
         </div>
-        <div className="flex flex-col items-center gap-2 sm:items-end">
-          <StatusBadge>Cursor Workshop / Quito</StatusBadge>
-          {isSupabaseConnected ? (
-            <StatusBadge>Supabase Connected</StatusBadge>
-          ) : null}
+
+        <div className="flex items-center gap-3">
+          <div data-auth-slot />
+          <ThemeToggle />
         </div>
       </div>
     </header>
